@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable implements JWTSubject
 {
+    use LaratrustUserTrait;
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -65,9 +67,5 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
-    //thi is for the fetching of the users by role..please take note
-    public function roles()
-    {
-       return $this->belongsTo(Role::class);
-    }
+
 }
