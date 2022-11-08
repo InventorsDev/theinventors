@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\JoinUsRequest;
 use App\Models\JoinUs;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Http\Traits\RespondsWithHttpStatus;
 
 class JoinUsController extends Controller
 {
+    use RespondsWithHttpStatus;
+  
     public function submit(JoinUsRequest $request)
     {
 
@@ -18,12 +19,9 @@ class JoinUsController extends Controller
             'portfolio' => ($request->portfolio) ? $request->portfolio : null
         ]);
 
-        return new JsonResponse(
-            [
-                'success' => 1,
-                'msg' => 'Thank you for indicating your interest to join our community, We will get in touch shortly !'
-            ],
-            200
-        );
+        $message = "Thank you for indicating your interest to join our community, We will get in touch shortly !";
+
+        return $this->success($message);
+
     }
 }
